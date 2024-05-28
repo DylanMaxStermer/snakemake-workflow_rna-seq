@@ -3,6 +3,8 @@
 # Config file should have unique sample names for each sample. Rows with the
 # same samples name will be merged (eg, for combining the same sample
 # sequencing across multiple lanes with multiple sets of fastq)
+
+#this is a test git to git test the gitds 
 configfile: "config/config.yaml"
 
 include: "rules/common.smk"
