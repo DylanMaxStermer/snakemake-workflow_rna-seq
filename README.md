@@ -78,5 +78,5 @@ You need to make a table with the pathways.
     <(ls -1 "$FASTQ_DIR"/*_R2_*.fastq.gz) >> "$SAMPLES_FILE"
 
 ### Create samples.tsv file with header
-echo -e "sample\tSTARGenomeName\tR1\tR2" > "$SAMPLES_FILE"
+    echo -e "sample\tSTARGenomeName\tR1\tR2" > "$SAMPLES_FILE"
 
