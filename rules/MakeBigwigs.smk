@@ -4,7 +4,7 @@ rule MakeBigwigs_NormalizedToGenomewideCoverage:
     Scale bigwig to base coverage per billion chromosomal reads
     """
     input:
-        fai = "/project2/yangili1/bjf79/ChromatinSplicingQTLs/code/ReferenceGenome/Fasta/GRCh38.primary_assembly.genome.fa.fai",
+        fai = "/project/yangili1/dylan_stermer/ReferenceGenomes/GRCh38.primary_assembly.genome.fa.fai",
         bam = "Alignments/STAR_Align/{sample}/Aligned.sortedByCoord.out.bam",
         bai = "Alignments/STAR_Align/{sample}/Aligned.sortedByCoord.out.bam.bai",
         NormFactorsFile = "../output/QC/ReadCountsPerSamples.tsv"

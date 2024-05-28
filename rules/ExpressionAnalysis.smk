@@ -9,8 +9,6 @@ rule featurecounts:
         summary = "featureCounts/{GenomeName}/{Strandedness}.Counts.txt.summary",
     threads:
         8
-    conda:
-        "../envs/subread_featureCounts.yml"
     resources:
         mem_mb = 12000,
         tasks = 9,
@@ -21,7 +19,7 @@ rule featurecounts:
         extra = ""
     shell:
         """
-        featureCounts {params.strand} {params.extra} -T {threads} --ignoreDup --primary -a {input.gtf} -o {output.counts} {input.bam} &> {log}
+        featureCounts -p {params.strand} {params.extra} -T {threads} --ignoreDup --primary -a {input.gtf} -o {output.counts} {input.bam} &> {log}
         """
 
 use rule featurecounts as featurecounts_allUnstranded with:

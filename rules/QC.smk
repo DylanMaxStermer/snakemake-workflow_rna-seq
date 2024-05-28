@@ -27,7 +27,7 @@ rule MultiQC:
         expand("Alignments/STAR_Align/{sample}/Log.final.out", sample= samples.index.unique()),
         expand("QC/QualimapRnaseq/{sample}/rnaseq_qc_results.txt", sample=samples.index.unique()),
         expand("FastqFastp/{sample}.fastp.json", sample=samples.index.unique()),
-        expand("featureCounts/{GenomeName}/{Strandedness}.Counts.txt.summary", GenomeName=samples['STARGenomeName'].unique(), Strandedness=samples['Strandedness'].unique()),
+        #expand("featureCounts/{GenomeName}/{Strandedness}.Counts.txt.summary", GenomeName=samples['STARGenomeName'].unique(), Strandedness=samples['Strandedness'].unique()),
         expand("idxstats/{sample}.idxstats.txt", sample=samples.index.unique())
     log: "logs/Multiqc.log"
     output:

@@ -1,3 +1,9 @@
+# what is this workflow 
+
+This workflow the one I did before going to Florida 
+These samples were all polyA 
+
+
 # Snakemake workflow: RNA-seq_SimpleQuantification
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.1.0-brightgreen.svg)](https://snakemake.bitbucket.io)
@@ -52,6 +58,19 @@ Execute the workflow locally via
 
 using `$N` cores or run it in a cluster environment via the included slurm snakemake profile.
 
-    snakemake --profile snakemake_profiles/slurm
+    snakemake --profile /project/yangili1/dylan_stermer/alt_seq_strategy_may2024/snakemake-workflow_rna-seq/snakemake_profiles/slurm_midway3
 
 See the [Snakemake documentation](https://snakemake.readthedocs.io) for further details.
+
+# When you get fastq files you need to make a table with the pathways. Here is close to the code that I used 
+# Everytime you use this code you need to change the location of the sample.tsv and the location of where you fastqfiles are located 
+echo -e "sample\tSTARGenomeName\tR1\tR2" > /project2/yangili1/dylan_stermer/polyA_riboMinus_sideByside/snakemake_workflow/config/samples.tsv
+paste -d'\t' <(ls -1 /project2/yangili1/dylan_stermer/polyA_riboMinus_sideByside/fastq/*_R1_*.fastq.gz | perl -lne '$_ =~ m/^.+?YLi-DS-8s-(.+?)_S.+$/; print "$1\tGRCh38_GencodeRelease44Comprehensive"') <(ls -1 /project2/yangili1/dylan_stermer/polyA_riboMinus_sideByside/fastq/*_R1_*.fastq.gz) <(ls -1 /project2/yangili1/dylan_stermer/polyA_riboMinus_sideByside/fastq/*_R2_*.fastq.gz) >> /project2/yangili1/dylan_stermer/polyA_riboMinus_sideByside/snakemake_workflow/config/samples.tsv
+
+# Create samples.tsv file with header
+echo -e "sample\tSTARGenomeName\tR1\tR2" > "$SAMPLES_FILE"
+
+# Generate sample entries and append to samples.tsv
+paste -d'\t' <(ls -1 "$FASTQ_DIR"/*_R1_*.fastq.gz | perl -lne '$_ =~ m/^.+?YLi-DS-8s-(.+?)_S.+$/; print "$1\tGRCh38_GencodeRelease44Comprehensive"') \
+            <(ls -1 "$FASTQ_DIR"/*_R1_*.fastq.gz) \
+            <(ls -1 "$FASTQ_DIR"/*_R2_*.fastq.gz) >> "$SAMPLES_FILE"
