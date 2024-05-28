@@ -4,9 +4,12 @@
 
 samples: config/samples.tsv
 STAR_genomes: config/STAR_Genome_List.tsv
+#STAR_genomes: /project/yangili1/dylan_stermer/mouse_pilot/snakemake-workflow_rna-seq/config/Genome_List_Mouse.tsv
 
 #Prefix for all ReferenceGenomes files... STAR index will be made at {GenomesPrefix}{GenomeName}/
-GenomesPrefix: "/project2/yangili1/bjf79/ReferenceGenomes/"
+
+GenomesPrefix: "/project/yangili1/dylan_stermer/ReferenceGenomes"
+#GenomesPrefix: "/project/yangili1/dylan_stermer/ReferenceGenomes/ncbi_dataset"
 
 #Scratch dir for large temporary files
-scratch: "/scratch/midway2/bjf79/"
+scratch: "/scratch/midway3/dylanstermer/"
