@@ -73,9 +73,7 @@ You need to make a table with the pathways.
     
 * Need to change the location of sample.tsv and the Fastqfiles locaion 
 
-    paste -d'\t' <(ls -1 "$FASTQ_DIR"/*_R1_*.fastq.gz | perl -lne '$_ =~ m/^.+?YLi-DS-8s-(.+?)_S.+$/; print "$1\tGRCh38_GencodeRelease44Comprehensive"') \
-    <(ls -1 "$FASTQ_DIR"/*_R1_*.fastq.gz) \
-    <(ls -1 "$FASTQ_DIR"/*_R2_*.fastq.gz) >> "$SAMPLES_FILE"
+    paste -d'\t' <(ls -1 "$FASTQ_DIR"/*_R1_*.fastq.gz | perl -lne '$_ =~ m/^.+?YLi-DS-8s-(.+?)_S.+$/; print "$1\tGRCh38_GencodeRelease44Comprehensive"') <(ls -1 "$FASTQ_DIR"/*_R1_*.fastq.gz) <(ls -1 "$FASTQ_DIR"/*_R2_*.fastq.gz) >> "$SAMPLES_FILE"
 
 ### Create samples.tsv file with header
     echo -e "sample\tSTARGenomeName\tR1\tR2" > "$SAMPLES_FILE"
