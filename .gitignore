@@ -2,6 +2,7 @@
 !config
 !config/*
 !Results
+!Results/*
 !images
 !images/*
 !snakemake_profiles
