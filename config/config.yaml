@@ -2,8 +2,8 @@
 # In case of sample based data, it should be complemented by a samples.tsv file that contains
 # one row per sample. It can be parsed easily via pandas.
 
-samples: config/samples.tsv
-STAR_genomes: config/STAR_Genome_List.tsv
+samples: ../config/samples.tsv
+STAR_genomes: ../config/STAR_Genome_List.tsv
 #STAR_genomes: /project/yangili1/dylan_stermer/mouse_pilot/snakemake-workflow_rna-seq/config/Genome_List_Mouse.tsv
 
 #Prefix for all ReferenceGenomes files... STAR index will be made at {GenomesPrefix}{GenomeName}/

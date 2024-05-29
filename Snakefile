@@ -5,7 +5,9 @@
 # sequencing across multiple lanes with multiple sets of fastq)
 
 #this is a test git to git test the gitds 
-configfile: "config/config.yaml"
+workdir: "Results"
+
+configfile: "../config/config.yaml"
 
 include: "rules/common.smk"
 
@@ -33,5 +35,5 @@ rule all:
         "Multiqc",
         "featureCounts/GRCh38_GencodeRelease44Comprehensive/AllSamplesUnstrandedCounting.Counts.txt",
         config['GenomesPrefix'] + "GRCh38_GencodeRelease44Comprehensive/Reference.Transcripts.colored.bed.gz",
-        expand("featureCounts/GRCh38_GencodeRelease44Comprehensive/{Strandedness}.Counts.txt", Strandedness=samples['Strandedness'].unique())
+       # expand("featureCounts/GRCh38_GencodeRelease44Comprehensive/{Strandedness}.Counts.txt", Strandedness=samples['Strandedness'].unique())
 
