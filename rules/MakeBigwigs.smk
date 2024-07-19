@@ -4,7 +4,8 @@ rule MakeBigwigs_NormalizedToGenomewideCoverage:
     Scale bigwig to base coverage per billion chromosomal reads
     """
     input:
-        fai = "/project/yangili1/dylan_stermer/ReferenceGenomes/GRCh38.primary_assembly.genome.fa.fai",
+        #fai = "/project/yangili1/dylan_stermer/ReferenceGenomes/GRCh38.primary_assembly.genome.fa.fai",
+        fai = "/project/yangili1/dylan_stermer/test_git/snakemake-workflow_rna-seq/Results/" + config['GenomeName'] + "/Reference.fa.fai", 
         bam = "Alignments/STAR_Align/{sample}/Aligned.sortedByCoord.out.bam",
         bai = "Alignments/STAR_Align/{sample}/Aligned.sortedByCoord.out.bam.bai",
         NormFactorsFile = "../output/QC/ReadCountsPerSamples.tsv"
@@ -22,9 +23,11 @@ rule MakeBigwigs_NormalizedToGenomewideCoverage:
         "logs/MakeBigwigs_unstranded/{sample}.log"
     resources:
         mem_mb = much_more_mem_after_first_attempt
-    shell:
+    shell:  #need to make the script work in all directories here it is hard coded
         """
         ScaleFactor=$(bc <<< "scale=3;1000000000/$(grep '{wildcards.sample}' {input.NormFactorsFile} | awk 'NR==1 {{print $2}}')")
-        scripts/BamToBigwig.sh {input.fai} {input.bam} {output.bw}  GENOMECOV_ARGS="{params.GenomeCovArgs} -scale ${{ScaleFactor}}" REGION='{params.Region}' MKTEMP_ARGS="{params.MKTEMP_ARGS}" SORT_ARGS="{params.SORT_ARGS}" {params.bw_minus}"{output.bw_minus}" &> {log}
+        
+        /project/yangili1/dylan_stermer/test_git/snakemake-workflow_rna-seq/scripts/BamToBigwig.sh {input.fai} {input.bam} {output.bw}  GENOMECOV_ARGS="{params.GenomeCovArgs} -scale ${{ScaleFactor}}" REGION='{params.Region}' MKTEMP_ARGS="{params.MKTEMP_ARGS}" SORT_ARGS="{params.SORT_ARGS}" {params.bw_minus}"{output.bw_minus}" &> {log}
         """
+
 

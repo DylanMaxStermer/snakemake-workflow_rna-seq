@@ -8,8 +8,13 @@ STAR_genomes: ../config/STAR_Genome_List.tsv
 
 #Prefix for all ReferenceGenomes files... STAR index will be made at {GenomesPrefix}{GenomeName}/
 
-GenomesPrefix: "/project/yangili1/dylan_stermer/ReferenceGenomes"
+#this is the absolute file path where it will place the Genome Annotation Results 
+GenomesPrefix: "/project/yangili1/dylan_stermer/test_git/snakemake-workflow_rna-seq/Results/"
 #GenomesPrefix: "/project/yangili1/dylan_stermer/ReferenceGenomes/ncbi_dataset"
+
+#GenomeName: GRCh38_GencodeRelease44Comprehensive
+GenomeName: GRCm39 # in the samples.tsv I also changed the STARGenomeName 
+#this should allow you to state which species you want to do the analysis in 
 
 #Scratch dir for large temporary files
 scratch: "/scratch/midway3/dylanstermer/"

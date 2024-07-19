@@ -20,10 +20,11 @@ def FillGenomeNameInFormattedString(FormattedString):
     def InputFunctionToReturn(wildcards):
         return FormattedString.format(GenomeName = samples[samples.index==wildcards.sample]['STARGenomeName'].iloc[0])
     return InputFunctionToReturn
+    
 
 def ExpandAllSamplesInFormatStringFromGenomeNameWildcard(FormattedString):
     def InputFunctionToReturn(wildcards):
-        return expand(FormattedString, sample=samples.loc[samples['STARGenomeName']==wildcards.GenomeName].index.unique())
+        return expand(FormattedString, sample=samples.loc[samples['STARGenomeName']==config['GenomeName']].index.unique())
     return InputFunctionToReturn
 
 def ExpandAllSamplesInFormatStringFromGenomeNameAndStrandWildcards(FormattedString):

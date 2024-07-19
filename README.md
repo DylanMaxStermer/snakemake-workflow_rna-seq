@@ -59,7 +59,7 @@ Execute the workflow locally via
 
 using `$N` cores or run it in a cluster environment via the included slurm snakemake profile.
 
-    snakemake --profile /project/yangili1/dylan_stermer/alt_seq_strategy_may2024/snakemake-workflow_rna-seq/snakemake_profiles/slurm_midway3
+    snakemake --profile /project/yangili1/dylan_stermer/test_git/snakemake-workflow_rna-seq/snakemake_profiles/slurm_midway3
 
 * not as part of the profile there is the account details for the Li lab which lets you submit jos to the cluster environment 
 * need to use a different profile depending on if you're running on midway2 or midway3 

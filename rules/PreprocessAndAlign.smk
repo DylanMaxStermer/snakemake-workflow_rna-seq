@@ -38,7 +38,7 @@ rule fastp:
         fastp -i {input.R1} -I {input.R2}  -o {output.R1} -O {output.R2} --html {output.html} --json {output.json} &> {log}
         """
 
-rule STAR_Align:
+rule STAR_Align: #This code is intended for paired end reads which is why there are R1/R2 ... going to make one for single end
     input:
         index = lambda wildcards: config['GenomesPrefix'] + samples.loc[wildcards.sample]['STARGenomeName'] + "/STARIndex",
         R1 = "FastqFastp/{sample}.R1.fastq.gz",
@@ -51,8 +51,10 @@ rule STAR_Align:
     log: "logs/STAR_Align/{sample}.log"
     params:
         GetSTARIndexDir = "/project2/yangili1/bjf79/ChromatinSplicingQTLs/code/ReferenceGenome/STARIndex/",
-        readMapNumber = -1,
+        readMapNumber = -1, #number of reads to map from the beginning of the file, -1 means map all reads 
         ENCODE_params = "--outFilterType BySJout --outFilterMultimapNmax 20  --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverReadLmax 0.04 --alignIntronMin 20 --alignIntronMax 1000000 --alignMatesGapMax 1000000",
+        # --outFilterType BySJout reduces the number of ”spurious” junctions; 
+        #--outFilterMultimapNmax 20max number of multiple alignments allowed for a read: if exceeded, the read is considered unmapped 
     resources:
         tasks = 9,
         mem_mb = 48000,
@@ -61,6 +63,10 @@ rule STAR_Align:
         """
         STAR --readMapNumber {params.readMapNumber} --outFileNamePrefix {output.outdir}/ --genomeDir {input.index}/ --readFilesIn {input.R1} {input.R2}  --outSAMtype BAM SortedByCoordinate --readFilesCommand zcat --runThreadN {threads} --outSAMmultNmax 1 --limitBAMsortRAM 8000000000 {params.ENCODE_params} --outSAMstrandField intronMotif  &> {log}
         """
+
+#--genomeDir specifies path to the genome directory where genome indices where generated
+# --outSAMtype BAM SortedByCoordinate output sorted by coordinate Aligned.sortedByCoord.out.bam file, similar to samtools sort command.
+# --readFilesCommand ... since input files are compressed .gz 
 
 rule indexBam:
     input:

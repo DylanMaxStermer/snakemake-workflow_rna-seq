@@ -4,7 +4,7 @@
 # same samples name will be merged (eg, for combining the same sample
 # sequencing across multiple lanes with multiple sets of fastq)
 
-#this is a test git to git test the gitds 
+#This sets the output direcotory to be here essentially. 
 workdir: "Results"
 
 configfile: "../config/config.yaml"
@@ -23,6 +23,8 @@ include: "rules/SplicingAnalysis.smk"
 include: "rules/ExpressionAnalysis.smk"
 include: "rules/QC.smk"
 include: "rules/MakeBigwigs.smk"
+#include: "rules/spliceQ.smk"
+
 
 rule all:
     input:
@@ -31,10 +33,11 @@ rule all:
         expand("FastqFastp/{sample}.fastp.html", sample=samples.index),
         "../output/QC/ReadCountsPerSamples.tsv",
         expand("bigwigs/unstranded/{sample}.bw", sample=samples.index),
-        "SplicingAnalysis/ObservedJuncsAnnotations/GRCh38_GencodeRelease44Comprehensive.uniq.annotated.tsv.gz",
+        "SplicingAnalysis/ObservedJuncsAnnotations/" + config['GenomeName'] + ".uniq.annotated.tsv.gz",
         "Multiqc",
-        "featureCounts/GRCh38_GencodeRelease44Comprehensive/AllSamplesUnstrandedCounting.Counts.txt",
-        config['GenomesPrefix'] + "GRCh38_GencodeRelease44Comprehensive/Reference.Transcripts.colored.bed.gz",
+        "featureCounts/" + config['GenomeName'] + "/AllSamplesUnstrandedCounting.Counts.txt",
+        config['GenomesPrefix'] + config['GenomeName'] + "/Reference.Transcripts.colored.bed.gz"
+        #expand("spliceQ/{sample}.png", sample=samples.index)
        # expand("featureCounts/GRCh38_GencodeRelease44Comprehensive/{Strandedness}.Counts.txt", Strandedness=samples['Strandedness'].unique())
 
    

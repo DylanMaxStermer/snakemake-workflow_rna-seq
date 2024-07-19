@@ -1,2 +1,3 @@
 sample	STARGenomeName	R1	R2
-Bri_1_cyt	GRCh38_GencodeRelease44Comprehensive	/project/yangili1/dylan_stermer/alt_seq_strategy_may2024/fastq/Bri_1_cyt_S4_R1_001.fastq.gz	/project/yangili1/dylan_stermer/alt_seq_strategy_may2024/fastq/Bri_1_cyt_S4_R2_001.fastq.gz
+Bri_1_cyt	GRCm39	/project/yangili1/dylan_stermer/alt_seq_strategy_may2024/fastq/Bri_1_cyt_S4_R1_001.fastq.gz	/project/yangili1/dylan_stermer/alt_seq_strategy_may2024/fastq/Bri_1_cyt_S4_R2_001.fastq.gz
+
